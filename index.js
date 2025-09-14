@@ -17,14 +17,12 @@ app.get('/', (req, res) => {
 
 // Endpoint POST untuk menyimpan data
 app.post('/save', async (req, res) => {
-  const { description } = req.body;
-  console.log(req.body);
-  
+  const { description, title, package } = req.body;
 
   // Simpan data ke tabel "users"
   const { data, error } = await supabase
     .from('notif')
-    .insert([{ description }]);
+    .insert([{ description, title, package }]);
 
   if (error) return res.status(500).send(error);
   res.send({ message: 'Data berhasil disimpan!', data });
